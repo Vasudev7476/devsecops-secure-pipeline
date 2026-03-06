@@ -20,18 +20,14 @@ jobs:
           wget https://github.com/aquasecurity/trivy/releases/latest/download/trivy_0.45.0_Linux-64bit.deb
           sudo dpkg -i trivy_0.45.0_Linux-64bit.deb
 
-      - name: Build Docker image
-        run: |
-          docker build -t demo-secure-app ./docker
+      - name: Build Docker Image
+        run: docker build -t demo-secure-app ./docker
 
-      - name: Scan Docker image
-        run: |
-          trivy image demo-secure-app
+      - name: Scan Docker Image
+        run: trivy image demo-secure-app
 
       - name: Install Checkov
-        run: |
-          pip install checkov
+        run: pip install checkov
 
-      - name: Scan Terraform code
-        run: |
-          checkov -d terraform
+      - name: Scan Terraform
+        run: checkov -d terraform
