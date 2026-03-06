@@ -10,24 +10,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
       - name: Checkout code
         uses: actions/checkout@v3
-
-      - name: Install Trivy
-        run: |
-          sudo apt-get update
-          sudo apt-get install wget -y
-          wget https://github.com/aquasecurity/trivy/releases/latest/download/trivy_0.45.0_Linux-64bit.deb
-          sudo dpkg -i trivy_0.45.0_Linux-64bit.deb
 
       - name: Build Docker Image
         run: docker build -t demo-secure-app ./docker
 
-      - name: Scan Docker Image
-        run: trivy image demo-secure-app
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: demo-secure-app
 
       - name: Install Checkov
         run: pip install checkov
 
-      - name: Scan Terraform
+      - name: Scan Terraform code
         run: checkov -d terraform
