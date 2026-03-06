@@ -17,10 +17,12 @@ jobs:
       - name: Build Docker Image
         run: docker build -t demo-secure-app ./docker
 
-      - name: Scan Docker Image
-        uses: aquasecurity/trivy-action@0.20.0
-        with:
-          image-ref: demo-secure-app
+       - name: Scan Docker Image
+  uses: aquasecurity/trivy-action@0.20.0
+  with:
+    image-ref: demo-secure-app
+    format: table
+    exit-code: '0'
 
       - name: Install Checkov
         run: pip install checkov
