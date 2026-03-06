@@ -11,3 +11,5 @@ Security checks implemented:
 Pipeline stages:
 
 Code push → Docker build → Container scan → Infrastructure scan
+
+Testing DevSecOps pipeline
