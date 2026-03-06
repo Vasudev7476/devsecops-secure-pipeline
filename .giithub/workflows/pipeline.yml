@@ -17,8 +17,8 @@ jobs:
       - name: Build Docker Image
         run: docker build -t demo-secure-app ./docker
 
-      - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@master
+      - name: Scan Docker Image
+        uses: aquasecurity/trivy-action@0.20.0
         with:
           image-ref: demo-secure-app
 
